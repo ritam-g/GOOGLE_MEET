@@ -1,4 +1,3 @@
-
 # Video Meet App — Production Microservices Build Plan
 
 > **Goal:** Real production app, real users.
