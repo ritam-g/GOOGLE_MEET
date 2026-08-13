@@ -1,0 +1,106 @@
+version: "3.9"
+
+services:
+  # ---------- Infra ----------
+  postgres:
+    image: postgres:16-alpine
+    container_name: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./infra/postgres-init:/docker-entrypoint-initdb.d
+
+  mongo:
+    image: mongo:7
+    container_name: mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+
+  # ---------- Services (placeholders for now) ----------
+  api-gateway:
+    build: ./services/api-gateway
+    container_name: api-gateway
+    ports:
+      - "4000:4000"
+    env_file:
+      - ./services/api-gateway/.env
+    depends_on:
+      - auth-service
+      - user-service
+      - room-service
+      - chat-service
+
+  auth-service:
+    build: ./services/auth-service
+    container_name: auth-service
+    ports:
+      - "4001:4001"
+    env_file:
+      - ./services/auth-service/.env
+    depends_on:
+      - postgres
+      - redis
+
+  user-service:
+    build: ./services/user-service
+    container_name: user-service
+    ports:
+      - "4002:4002"
+    env_file:
+      - ./services/user-service/.env
+    depends_on:
+      - postgres
+      - redis
+
+  room-service:
+    build: ./services/room-service
+    container_name: room-service
+    ports:
+      - "4003:4003"
+    env_file:
+      - ./services/room-service/.env
+    depends_on:
+      - postgres
+      - auth-service
+
+  signaling-service:
+    build: ./services/signaling-service
+    container_name: signaling-service
+    ports:
+      - "4004:4004"
+    env_file:
+      - ./services/signaling-service/.env
+    depends_on:
+      - redis
+      - auth-service
+
+  chat-service:
+    build: ./services/chat-service
+    container_name: chat-service
+    ports:
+      - "4005:4005"
+    env_file:
+      - ./services/chat-service/.env
+    depends_on:
+      - mongo
+      - redis
+
+volumes:
+  postgres_data:
+  mongo_data:
