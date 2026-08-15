@@ -1,0 +1,2 @@
+npx prisma studio
+u can see the ui of postgress 
