@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express"
 import { ObjectSchema } from "joi"
 import AppError from "../utils/AppError"
+import logger from "../utils/logger"
 
 /**  
  * * @param {ObjectSchema} schema
@@ -13,6 +14,7 @@ export const validateMiddleware = (schema: ObjectSchema) => {
         const { error } = schema.validate(req.body)
 
         if (error) {
+            logger.error({ error, path: req.path, method: req.method }, 'Validation error');
             return next(new AppError(error.details[0].message, 400))
         }
         next()

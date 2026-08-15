@@ -1,9 +1,12 @@
 import express, { Request, Response } from 'express';
+import pinoHttp from 'pino-http';
 import { errorHandler } from './middleware/errorHandler';
+import logger from './utils/logger.js';
 
 const app = express();
-app.use(express.json());
 
+app.use(express.json());
+app.use(pinoHttp({ logger }));
 /**  
  * * @description Health check
  */
