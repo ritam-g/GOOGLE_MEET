@@ -1,10 +1,11 @@
 import { Request, Response, NextFunction } from "express"
 import { ObjectSchema } from "joi"
+import AppError from "../utils/AppError"
 
 /**  
  * * @param {ObjectSchema} schema
  * * @returns {Function}
- * @description Validate middleware
+ * * @description Validate middleware
  */
 export const validateMiddleware = (schema: ObjectSchema) => {
 
@@ -12,10 +13,7 @@ export const validateMiddleware = (schema: ObjectSchema) => {
         const { error } = schema.validate(req.body)
 
         if (error) {
-            return res.status(400).json({
-                success: false,
-                error: error.details[0].message
-            })
+            return next(new AppError(error.details[0].message, 400))
         }
         next()
     }
