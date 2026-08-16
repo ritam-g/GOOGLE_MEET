@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import { JWT_ACCESS_SECRET } from '../config/env.js';
-import  AppError  from '../utils/AppError.js';
+import AppError from '../utils/AppError.js';
 
 export const authGuard = (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization;
@@ -14,9 +14,9 @@ export const authGuard = (req: Request, res: Response, next: NextFunction) => {
 
   try {
     const decoded = jwt.verify(token, JWT_ACCESS_SECRET);
-    (req as any).userId = (decoded as any).userId;
+    req.userId = (decoded as { userId: string }).userId;
     next();
-  } catch (err) {
+  } catch (err: any) {
     return next(new AppError('Invalid or expired token', 401));
   }
 };
