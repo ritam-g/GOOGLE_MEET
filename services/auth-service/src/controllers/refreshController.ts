@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
-import prisma from '../config/db';
-import AppError from '../utils/AppError';
-import logger from '../utils/logger';
-import { generateAccessToken } from '../utils/tokenUtils';
+import prisma from '../config/db.js';
+import AppError from '../utils/AppError.js';
+import logger from '../utils/logger.js';
+import { generateAccessToken } from '../utils/tokenUtils.js';
 
 /**
  * Handles access token refresh using the refresh token stored in httpOnly cookie.

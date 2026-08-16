@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import { JWT_ACCESS_SECRET } from '../config/env';
-import logger from '../utils/logger';
+import { JWT_ACCESS_SECRET } from '../config/env.js';
+import logger from '../utils/logger.js';
 
 /**
  * Verifies an access token — used internally by other services

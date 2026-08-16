@@ -51,7 +51,7 @@ services:
     ports:
       - "4001:4001"
     env_file:
-      - ./services/auth-service/.env
+      - ./services/auth-service/.env.docker
     depends_on:
       - postgres
       - redis

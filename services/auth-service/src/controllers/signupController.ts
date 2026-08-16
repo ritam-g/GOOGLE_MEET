@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcrypt';
-import prisma from '../config/db'
-import AppError from '../utils/AppError';
-import { publishEvent } from '../config/redis';
-import logger from '../utils/logger';
+import prisma from '../config/db.js'
+import AppError from '../utils/AppError.js';
+import { publishEvent } from '../config/redis.js';
+import logger from '../utils/logger.js';
 
 
 /**  

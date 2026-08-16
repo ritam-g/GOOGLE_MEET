@@ -1,7 +1,7 @@
 import Redis from 'ioredis';
-import { REDIS_URL } from "./env"
-import logger from '../utils/logger';
-import AppError from '../utils/AppError';
+import { REDIS_URL } from "./env.js"
+import logger from '../utils/logger.js';
+import AppError from '../utils/AppError.js';
 
 const redis = new Redis(REDIS_URL);
 

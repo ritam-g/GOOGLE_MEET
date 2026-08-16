@@ -1,9 +1,9 @@
 import express, { Request, Response } from 'express';
 import pinoHttp from 'pino-http';
 import cookieParser from 'cookie-parser'
-import { errorHandler } from './middleware/errorHandler';
+import { errorHandler } from './middleware/errorHandler.js';
 import logger from './utils/logger.js';
-import v1Routes from './routes/v1';
+import v1Routes from './routes/v1/index.js';
 
 const app = express();
 
