@@ -16,11 +16,11 @@ redis.on('error', (err: any) => {
 /**  
  * Publishes an event to a specified Redis channel.
  * @param {string} channel - The Redis channel to publish the event to.
- * @param {string} data - The data to be published as a string.
+ * @param {object} data - The data to be published.
  * @throws {AppError} Throws an AppError if publishing fails.
  * @description This function uses the Redis client to publish a message to a specified channel. It logs the success or failure of the operation and throws an AppError in case of failure, providing a clear error message and status code.
  */
-export const publishEvent = async (channel: string, data: Object) => {
+export const publishEvent = async (channel: string, data: object) => {
     try {
         await redis.publish(channel, JSON.stringify(data));
         logger.info(`Event published to channel ${channel}: ${JSON.stringify(data)}`);
