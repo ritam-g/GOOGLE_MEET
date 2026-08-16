@@ -3,6 +3,7 @@ import pinoHttp from 'pino-http';
 import cookieParser from 'cookie-parser'
 import { errorHandler } from './middleware/errorHandler';
 import logger from './utils/logger.js';
+import v1Routes from './routes/v1';
 
 const app = express();
 
@@ -15,6 +16,10 @@ app.use(pinoHttp({ logger }));
 app.get('/health', (req: Request, res: Response) => {
   res.json({ status: 'ok', service: 'auth-service' });
 });
+/** 
+ * @description API v1 routes
+ */
+app.use('/api/v1', v1Routes);
 
 /**
  * @description Global error handler
