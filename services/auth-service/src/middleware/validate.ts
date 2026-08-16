@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express"
 import { ObjectSchema } from "joi"
-import AppError from "../utils/AppError"
-import logger from "../utils/logger"
+import AppError from "../utils/AppError.js"
+import logger from "../utils/logger.js"
 
 /**  
  * * @param {ObjectSchema} schema

@@ -1,2 +1,7 @@
 npx prisma studio
 u can see the ui of postgress 
+Command	Kya Hota Hai	Data Safe?
+
+docker-compose stop	                Sirf pause	✅ Safe
+docker-compose down	                Container delete, volume rehta hai	✅ Safe
+docker-compose down -v	            Sab kuch delete	❌ Data gone

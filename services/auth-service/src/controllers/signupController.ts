@@ -1,9 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcrypt';
-import prisma from '../config/db'
-import AppError from '../utils/AppError';
-import { publishEvent } from '../config/redis';
-import logger from '../utils/logger';
+import prisma from '../config/db.js'
+import AppError from '../utils/AppError.js';
+import { publishEvent } from '../config/redis.js';
+import logger from '../utils/logger.js';
+import { successResponse } from '../utils/response.js';
 
 
 /**  
@@ -31,11 +32,15 @@ export const signupController = async (
         logger.info(`User created with ID: ${user.id} and email: ${user.email}`);
 
         await publishEvent('user-created', { userId: user.id })
-        res.status(201).json({
-            success: true,
-            data: { userId: user.id, email: user.email },
-        });
+        
+        successResponse(res, { userId: user.id }, 201, 'User created successfully');
+
     } catch (err: any) {
+        if (err.code === 'P2002') {
+            logger.warn(`Signup failed: email already exists - ${req.body.email}`);
+            return next(new AppError('Email already exists', 409));
+        }
+
         logger.error('Error in signupController:', err);
         next(new AppError('Failed to create user', 500));
     }

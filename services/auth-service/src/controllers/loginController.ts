@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
-import prisma from '../config/db';
-import AppError from '../utils/AppError';
-import logger from '../utils/logger';
-import { comparePassword } from '../utils/passwordUtils';
-import { generateAccessToken, generateRefreshToken } from '../utils/tokenUtils';
+import prisma from '../config/db.js';
+import AppError from '../utils/AppError.js';
+import logger from '../utils/logger.js';
+import { comparePassword } from '../utils/passwordUtils.js';
+import { generateAccessToken, generateRefreshToken } from '../utils/tokenUtils.js';
 
 /**
  * Handles user login by verifying credentials and issuing access + refresh tokens.

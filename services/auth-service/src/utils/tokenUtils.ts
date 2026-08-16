@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { JWT_ACCESS_SECRET, JWT_REFRESH_SECRET } from '../config/env';
+import { JWT_ACCESS_SECRET, JWT_REFRESH_SECRET } from '../config/env.js';
 
 /**
  * Generates a short-lived access token.
