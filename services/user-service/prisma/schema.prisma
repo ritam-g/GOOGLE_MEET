@@ -16,6 +16,6 @@ model Profile {
   userId      String   @unique
   displayName String?
   avatarUrl   String?
-  preferences String?
+  preferences Json?
   createdAt   DateTime @default(now())
 }

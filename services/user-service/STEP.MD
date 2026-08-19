@@ -1,4 +1,3 @@
-
 # Video Meet App — Next Phase Plan (Auth Wrap-Up → User Service)
 
 > **Where you are:** Auth Service core is built, tested, and Dockerized (signup/login/refresh/logout/verify-token all working). This plan covers **two parts**: (A) the small remaining hardening items for Auth Service, and (B) the full, file-by-file build of **Phase 3 — User Service**, adapted to your actual stack (TypeScript, ES Modules, PostgreSQL + Prisma with the `prisma-client-js` generator, per-service Docker).
