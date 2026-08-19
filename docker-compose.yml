@@ -62,7 +62,7 @@ services:
     ports:
       - "4002:4002"
     env_file:
-      - ./services/user-service/.env
+      - ./services/user-service/.env.docker
     depends_on:
       - postgres
       - redis
