@@ -73,7 +73,7 @@ services:
     ports:
       - "4003:4003"
     env_file:
-      - ./services/room-service/.env
+      - ./services/room-service/.env.docker
     depends_on:
       - postgres
       - auth-service
