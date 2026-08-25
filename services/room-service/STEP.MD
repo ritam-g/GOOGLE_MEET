@@ -1,4 +1,3 @@
-
 # Video Meet App — Phase 4: Room Service (Full Build Plan)
 
 > **Where you are:** Auth Service ✅ Done. User Service ✅ Done (signup → auto profile creation via Redis, GET/PATCH `/me` working). Both Dockerized and tested.
