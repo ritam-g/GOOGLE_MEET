@@ -10,7 +10,7 @@ export const endRoomController = async (
     next: NextFunction
 ) => {
     try {
-        const { code } = req.params;
+         const code = req.params.code as string;
         const room = await prisma.room.findUnique({ where: { code } });
 
         if (!room) {

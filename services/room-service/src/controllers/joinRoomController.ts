@@ -11,8 +11,13 @@ export const joinRoomController = async (
     next: NextFunction
 ) => {
     const { code } = req.body
-
+    const userId = req.userId;
     try {
+
+
+        if (!userId) {
+            return next(new AppError('Unauthorized', 401));
+        }
         const room = await prisma.room.findUnique({
             where: { code }
         })
@@ -21,7 +26,7 @@ export const joinRoomController = async (
         }
 
         const participant = await prisma.roomParticipant.create({
-            data: { roomId: room.id, userId: req.userId }
+            data: { roomId: room.id, userId }
         });
 
         logger.info({ room, participant }, 'Room joined');
