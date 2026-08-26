@@ -9,7 +9,7 @@ export const getRoomController = async (
     res: Response,
     next: NextFunction
 ) => {
-    const { code } = req.body
+    const { code } = req.body? req.body : req.params
 
     try {
         const room = await prisma.room.findUnique({
