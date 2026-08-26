@@ -21,14 +21,10 @@ export const getRoomController = async (
     res: Response,
     next: NextFunction
 ) => {
-<<<<<<< HEAD
-    const { code } = req.body? req.body : req.params
-=======
     // FIX: code comes from the URL, not the body — GET requests
     // shouldn't rely on req.body, and req.body is always truthy ({}),
     // so the old ternary silently ignored req.params every time.
     const { code } = req.params as any;
->>>>>>> phase-5-signaling-service
 
     try {
         const room = await prisma.room.findUnique({
