@@ -26,11 +26,12 @@ export function registerRelayHandlers(io: Server, socket: Socket) {
      * @description Relay handler for offer/answer/ice-candidate events
      * @param event - the event name, e.g. 'offer', 'answer', 'ice-candidate'
      * @returns {void}
+     * @emits {string} event
      */
     const relay = (event: string) => {
         return (payload: RelayPayload) => {
             const { targetSocketId, ...rest } = payload;
-            socket.to(targetSocketId).emit(event, { fromSocketId: socket.id, ...rest });
+            io.to(targetSocketId).emit(event, { fromSocketId: socket.id, ...rest });
         }
     }
 
