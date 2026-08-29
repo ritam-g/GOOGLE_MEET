@@ -4,12 +4,14 @@
   "description": "**Port:** 4004 **Database:** none (stateless HTTP/WS layer) — uses **Redis** for live, in-memory presence only **Protocol:** WebSocket (Socket.io), not REST",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsx watch server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
     "axios": "^1.20.0",
     "dotenv": "^17.4.2",

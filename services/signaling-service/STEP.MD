@@ -1,4 +1,3 @@
-
 # Video Meet App — Phase 5: Signaling Service (Full Build Plan)
 
 > **Where you are:** Auth Service ✅ Done. User Service ✅ Done. Room Service ✅ Done
