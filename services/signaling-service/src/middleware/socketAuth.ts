@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import { Socket } from 'socket.io';
 import { JWT_ACCESS_SECRET } from '../config/env.js';
 import AppError from '../utils/AppError.js';
+import logger from '../utils/logger.js';
 
 /**  
  *@description Middleware to authenticate socket.io connections
@@ -17,10 +18,12 @@ export function socketAuth(socket: Socket, next: (err?: Error) => void) {
     }
     try {
         const paylode = jwt.verify(token, JWT_ACCESS_SECRET) as { userId: string }
+        logger.info(`Socket authenticated: ${paylode.userId}`);
         socket.data.userId = paylode.userId;
         socket.data.token = token;
         next();
-    } catch (error) {
+    } catch (error: any) {
+        logger.error('Socket authentication error:', error);
         next(new AppError('Invalid or expired token', 401));
     }
 
