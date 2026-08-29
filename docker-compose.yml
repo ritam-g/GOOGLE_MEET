@@ -84,10 +84,10 @@ services:
     ports:
       - "4004:4004"
     env_file:
-      - ./services/signaling-service/.env
+      - ./services/signaling-service/.env.docker
     depends_on:
       - redis
-      - auth-service
+      - room-service
 
   chat-service:
     build: ./services/chat-service
