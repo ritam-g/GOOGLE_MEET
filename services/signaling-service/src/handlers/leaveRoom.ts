@@ -22,6 +22,7 @@ async function cleanUp(socket: Socket) {
 }
 
 export function registerLeaveRoom(socket: Socket) {
+    logger.info(`Trigger registerLeaveRoom for socket ${socket.id}`)
     socket.on('leave-room', () => cleanUp(socket))
     socket.on('disconnect', () => cleanUp(socket))
 }

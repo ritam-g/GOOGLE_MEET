@@ -13,6 +13,7 @@ import logger from '../utils/logger.js';
  */
 export function registerJoinRoom(socket: Socket) {
     socket.on('join-room', async ({ roomCode }: { roomCode: string }) => {
+        logger.info(` Trigger registerJoinRoom for room ${roomCode}`)
         try {
             await getActiveRoom(roomCode, socket.data.token);
             const setKey = `room:${roomCode}:members`

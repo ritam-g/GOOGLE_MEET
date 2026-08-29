@@ -1,4 +1,5 @@
 import { Server, Socket } from 'socket.io';
+import logger from '../utils/logger';
 
 /**
  * Shape of every relay payload — targetSocketId tells us where to
@@ -22,6 +23,7 @@ interface RelayPayload {
  */
 
 export function registerRelayHandlers(io: Server, socket: Socket) {
+    logger.info(`Trigger registerRelayHandlers for socket ${socket.id}`)
     /**  
      * @description Relay handler for offer/answer/ice-candidate events
      * @param event - the event name, e.g. 'offer', 'answer', 'ice-candidate'
