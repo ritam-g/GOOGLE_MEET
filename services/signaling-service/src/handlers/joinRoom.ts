@@ -28,14 +28,15 @@ export function registerJoinRoom(socket: Socket) {
             })
 
             logger.info(`Socket ${socket.id} joined room ${roomCode}`)
-            
+
             socket.to(roomCode).emit("peer-joined", {
                 socketId: socket.id,
                 userId: socket.data.userId
             })
 
 
-        } catch (err) {
+        } catch (err: any) {
+            logger.error('Room not found or has ended', err)
             socket.emit('join-error', 'Room not found or has ended');
             return
         }

@@ -14,6 +14,7 @@ export function socketAuth(socket: Socket, next: (err?: Error) => void) {
     const token = socket.handshake.auth?.token;
 
     if (!token) {
+        logger.error('No token provided');
         return next(new AppError('No token provided', 401));
     }
     try {
