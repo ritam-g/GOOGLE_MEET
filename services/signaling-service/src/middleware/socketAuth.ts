@@ -11,7 +11,7 @@ import logger from '../utils/logger.js';
  *@returns {void} 
  */
 export function socketAuth(socket: Socket, next: (err?: Error) => void) {
-    const token = socket.handshake.auth?.token;
+    const token = socket.handshake.auth?.token|| socket.handshake.query?.token;;
 
     if (!token) {
         logger.error('No token provided');
