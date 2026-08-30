@@ -1,4 +1,3 @@
-
 # Video Meet App — Next Steps: API Gateway → Signaling Service
 
 > **Where you are:** Auth ✅, User ✅, Room ✅ — all built, tested, Dockerized, running on ports 4001/4002/4003. Three real services now exist, which is exactly the point the original plan flagged as "build the Gateway now, not before" (a gateway proxying to one backend isn't informative to build in isolation — with three, it actually earns its place).

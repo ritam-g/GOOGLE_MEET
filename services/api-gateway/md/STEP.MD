@@ -220,7 +220,7 @@ export default router;
 
 ---
 
-## Step 7 — `src/app.ts`
+## Step 7 — `src/	`
 
 **Why:** two details here are easy to get wrong and both would silently break proxying if missed — they're called out explicitly rather than left implicit.
 
