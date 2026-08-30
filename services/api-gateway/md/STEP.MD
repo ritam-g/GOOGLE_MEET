@@ -1,4 +1,3 @@
-
 # API Gateway — Detailed Step-by-Step Build (Why / How / Code)
 
 > **Status check:** Auth ✅, User ✅, Room ✅, Signaling ✅ — all four backend services are built, tested, and Dockerized. This is genuinely the right moment for the Gateway: it now has four real backends to unify, not one.
