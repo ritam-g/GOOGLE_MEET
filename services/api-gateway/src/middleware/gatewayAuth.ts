@@ -15,6 +15,7 @@ export function gatewayAuth(req: Request, res: Response, next: NextFunction) {
     try {
         const decoded = jwt.verify(token, JWT_ACCESS_SECRET) as { userId: string };
         req.userId = decoded.userId;
+        req.headers['x-user-id'] = decoded.userId; // forwarded downstream via the proxy
         next()
     } catch (err) {
         return next(new AppError('Invalid token', 401));

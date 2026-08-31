@@ -20,10 +20,6 @@ app.get('/health', (req, res) => {
     res.json({ status: 'ok', service: 'api-gateway' })
 });
 
-app.use('/api', (req, res, next) => {
-  console.log('GATEWAY RECEIVED PATH:', req.path);
-  next();
-});
 app.use('/api', proxyRoutes);
 
 app.use(errorHandler);

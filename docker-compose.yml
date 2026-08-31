@@ -38,7 +38,7 @@ services:
     ports:
       - "4000:4000"
     env_file:
-      - ./services/api-gateway/.env
+      - ./services/api-gateway/.env.docker
     depends_on:
       - auth-service
       - user-service
