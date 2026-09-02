@@ -1,6 +1,6 @@
 # WebRTC Test Client — Phase 6
 
-> **Diagnostic tool. Not a deployable. Not a microservice.**  
+> **Diagnostic tool. Not a deployable. Not a microservice.**
 > Lives outside `/services`. Has no `package.json`, no `Dockerfile`, no docker-compose entry.
 
 ---
@@ -25,16 +25,17 @@ docker-compose up -d
 ```
 
 Services needed:
-| Service | Port | Why |
-|---|---|---|
-| Auth Service | 4001 | Get access tokens |
-| Room Service | 4003 | Create/validate rooms |
-| Signaling Service | **4004** | WebSocket signaling |
-| Redis | 6379 | Room membership tracking |
+
+| Service           | Port           | Why                      |
+| ----------------- | -------------- | ------------------------ |
+| Auth Service      | 4001           | Get access tokens        |
+| Room Service      | 4003           | Create/validate rooms    |
+| Signaling Service | **4004** | WebSocket signaling      |
+| Redis             | 6379           | Room membership tracking |
 
 ### Step 2 — Serve the test client
 
-> `file://` URLs block `getUserMedia()` in most browsers (HTTPS/localhost requirement).  
+> `file://` URLs block `getUserMedia()` in most browsers (HTTPS/localhost requirement).
 > Always serve this via a local HTTP server.
 
 ```bash
@@ -61,10 +62,10 @@ Content-Type: application/json
 
 ### Step 4 — Two tabs
 
-| Tab | Token | Room Code |
-|-----|-------|-----------|
-| Tab 1 | User A's `accessToken` | Same `roomCode` |
-| Tab 2 | User B's `accessToken` | Same `roomCode` |
+| Tab   | Token                   | Room Code        |
+| ----- | ----------------------- | ---------------- |
+| Tab 1 | User A's`accessToken` | Same`roomCode` |
+| Tab 2 | User B's`accessToken` | Same`roomCode` |
 
 1. Open Tab 1 → paste token + room code → **Join Call** → grant camera/mic
 2. Open Tab 2 → paste token + room code → **Join Call** → grant camera/mic
@@ -115,29 +116,29 @@ test-client/
 
 ## Known Failure Modes
 
-| Symptom | Likely Cause | Fix |
-|---|---|---|
-| No camera prompt | `file://` blocks `getUserMedia()` | Serve via `npx serve .` |
-| `connect_error` in console | Invalid token or Signaling not running | Check token, check `docker ps` |
-| `peer-joined` never fires | Wrong room code in one tab | Verify both tabs use identical `roomCode` |
-| `setRemoteDescription` throws | SDP mangled in relay | Check relay.ts isn't double-serialising payload |
-| ICE flows but video never appears | `ontrack` didn't fire | Confirm `addTrack()` happens before `createOffer()` |
-| Works on localhost, fails across networks | NAT traversal needed | Expected — this is what Phase 7 (TURN) solves |
+| Symptom                                   | Likely Cause                           | Fix                                                    |
+| ----------------------------------------- | -------------------------------------- | ------------------------------------------------------ |
+| No camera prompt                          | `file://` blocks `getUserMedia()`  | Serve via`npx serve .`                               |
+| `connect_error` in console              | Invalid token or Signaling not running | Check token, check`docker ps`                        |
+| `peer-joined` never fires               | Wrong room code in one tab             | Verify both tabs use identical`roomCode`             |
+| `setRemoteDescription` throws           | SDP mangled in relay                   | Check relay.ts isn't double-serialising payload        |
+| ICE flows but video never appears         | `ontrack` didn't fire                | Confirm`addTrack()` happens before `createOffer()` |
+| Works on localhost, fails across networks | NAT traversal needed                   | Expected — this is what Phase 7 (TURN) solves         |
 
 ---
 
 ## What This Proves / What It Doesn't
 
-| ✅ Proved by this phase | ❌ Not tested here |
-|---|---|
-| Real SDP offer/answer survives relay round-trip | TURN/STUN for restrictive NAT |
-| ICE negotiation completes on localhost/LAN | 3+ simultaneous peers (SFU) |
-| `ontrack` fires and media renders | Reconnection handling |
-| Phase 5 Signaling is genuinely end-to-end correct | React frontend |
+| ✅ Proved by this phase                           | ❌ Not tested here            |
+| ------------------------------------------------- | ----------------------------- |
+| Real SDP offer/answer survives relay round-trip   | TURN/STUN for restrictive NAT |
+| ICE negotiation completes on localhost/LAN        | 3+ simultaneous peers (SFU)   |
+| `ontrack` fires and media renders               | Reconnection handling         |
+| Phase 5 Signaling is genuinely end-to-end correct | React frontend                |
 
 ---
 
 ## After This Phase
 
-If **Test 8 (remote video renders)** passes → move to **Phase 7: TURN/STUN hardening**.  
+If **Test 8 (remote video renders)** passes → move to **Phase 7: TURN/STUN hardening**.
 Keep this file around as a fast sanity-check after any future Signaling Service changes.
