@@ -99,7 +99,13 @@ services:
     depends_on:
       - mongo
       - redis
-
+  coturn:
+    image: coturn/coturn:latest
+    container_name: coturn
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - ./infra/coturn/turnserver.conf:/etc/coturn/turnserver.conf
 volumes:
   postgres_data:
   mongo_data:
